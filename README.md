@@ -8,7 +8,7 @@ Source At:
 https://github.com/Nepomuceno/CoreNLPContainer
 
 ## Featured Tags
-- `3.9.2` (Current)
+- `3.9.2` [(Current)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/english)
     -  `3.9.2-arabic` `arabic` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/arabic)
     
     -  `3.9.2-chinese` `chinese` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/chinese)

@@ -6,47 +6,108 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'Ubuntu-16.04'
-
 variables:
   imageName: '$(dockerId)/stanfordcorenlp'
 
-steps:
-- script: docker login -u $(dockerId) -p $(pswd)
-  displayName: 'login docker hub'
+jobs:
+- job: login
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: docker login -u $(dockerId) -p $(pswd)
+    displayName: 'login docker hub'
 
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-arabic -t $(imageName):arabic .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/arabic"
-  displayName: 'build 3.9.2 arabic'
+- job: arabic
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-arabic -t $(imageName):arabic .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/arabic"
+    displayName: 'build 3.9.2 arabic'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-chinese -t $(imageName):chinese .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/chinese"
-  displayName: 'build 3.9.2 chinese'
+- job: chinese
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-chinese -t $(imageName):chinese .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/chinese"
+    displayName: 'build 3.9.2 chinese'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
-- script: docker build -f Dockerfile -t $(imageName):3.9.2 -t $(imageName):3.9.2-english -t $(imageName):english -t $(imageName):latest .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english"
-  displayName: 'build 3.9.2 english'
+- job: english
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2 -t $(imageName):3.9.2-english -t $(imageName):english -t $(imageName):latest .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english"
+    displayName: 'build 3.9.2 english'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-english-kbp -t $(imageName):english-kbp .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english-kbp"
-  displayName: 'build 3.9.2 english-kbp'
+- job: englishkbp
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-english-kbp -t $(imageName):english-kbp .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english-kbp"
+    displayName: 'build 3.9.2 english-kbp'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-french -t $(imageName):french .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/french"
-  displayName: 'build 3.9.2 french'
-
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-german -t $(imageName):german .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/german"
-  displayName: 'build 3.9.2 german'
-
-- script: docker build -f Dockerfile -t $(imageName):3.9.2-spanish -t $(imageName):spanish .
-  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/spanish"
-  displayName: 'build 3.9.2 spanish'
-
+- job: french
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-french -t $(imageName):french .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/french"
+    displayName: 'build 3.9.2 french'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
 
+- job: french
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-french -t $(imageName):french .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/french"
+    displayName: 'build 3.9.2 french'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
+
+- job: german
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-german -t $(imageName):german .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/german"
+    displayName: 'build 3.9.2 german'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
 
 
-- script: docker push $(imageName)
-  displayName: 'push docker images'
+- job: spanish
+  timeoutInMinutes: 90
+  dependsOn:
+  - login
+  steps:
+  - script: docker build -f Dockerfile -t $(imageName):3.9.2-spanish -t $(imageName):spanish .
+    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/spanish"
+    displayName: 'build 3.9.2 spanish'
+  - script: docker push $(imageName)
+    displayName: 'push docker'
+
+
+
+
+
