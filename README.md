@@ -1,14 +1,35 @@
-stanford-corenlp
------
+# stanford-corenlp
+
 [![Build Status](https://gabrielbico.visualstudio.com/OSS/_apis/build/status/Nepomuceno.CoreNLPContainer?branchName=master)](https://gabrielbico.visualstudio.com/OSS/_build/latest?definitionId=3&branchName=master)
 
 Inspired on: https://github.com/NLPbox/stanford-corenlp-docker
 
-This Dockerfile will build and run the most current release of the
+Source At:
+https://github.com/Nepomuceno/CoreNLPContainer
+
+## Featured Tags
+- `3.9.2` (Current)
+    -  `3.9.2-arabic` `arabic` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/arabic)
+    
+    -  `3.9.2-chinese` `chinese` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/chinese)
+
+    -  `3.9.2-english` `english` `latest` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/english)
+
+    -  `3.9.2-english-kbp` `english-kbp` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/english-kbp)
+
+    -  `3.9.2-french` `french` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/french)
+
+    -  `3.9.2-german` `german` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/german)
+
+    -  `3.9.2-spanish` `spanish` [(Dockerfile)](https://github.com/Nepomuceno/CoreNLPContainer/tree/master/3.9.2/spanish)
+
+
+
+
+This Dockerfile will build and run a release of the
 [Stanford CoreNLP server](http://stanfordnlp.github.io/CoreNLP/corenlp-server.html) in a docker container.
 
-Usage
------
+## Usage
 
 To download and run a [prebuilt version of the CoreNLP server](https://hub.docker.com/r/gabrielbico/stanfordcorenlp/)
 from Docker Hub locally at ``http://localhost:9000``, just type:
@@ -64,11 +85,11 @@ You can also parse a file, it should be one line per sentence that you want to p
 ```sh
 wget -q --post-file "./samplefile/large-book-00" \
   'localhost:9000/?properties={"annotators":"parse","outputFormat":"json"}' -O -
-``
+```
 
 If you need the full xml output and want to configure more parameters, try:
 
-```
+```sh
 wget -q --post-data "Although they didn't like it, they accepted the offer." \
   'localhost:9000/?properties={ \
     "annotators":"tokenize,ssplit,pos,lemma,ner,parse", \

@@ -16,6 +16,14 @@ steps:
 - script: docker login -u $(dockerId) -p $(pswd)
   displayName: 'login docker hub'
 
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-arabic -t $(imageName):arabic .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/arabic"
+  displayName: 'build 3.9.2 arabic'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-chinese -t $(imageName):chinese .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/chinese"
+  displayName: 'build 3.9.2 chinese'
+
 - script: docker build -f Dockerfile -t $(imageName):3.9.2 -t $(imageName):3.9.2-english -t $(imageName):english -t $(imageName):latest .
   workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english"
   displayName: 'build 3.9.2 english'
@@ -23,6 +31,22 @@ steps:
 - script: docker build -f Dockerfile -t $(imageName):3.9.2-english-kbp -t $(imageName):english-kbp .
   workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english-kbp"
   displayName: 'build 3.9.2 english-kbp'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-french -t $(imageName):french .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/french"
+  displayName: 'build 3.9.2 french'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-german -t $(imageName):german .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/german"
+  displayName: 'build 3.9.2 german'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-spanish -t $(imageName):spanish .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/spanish"
+  displayName: 'build 3.9.2 spanish'
+
+
+
+
 
 - script: docker push $(imageName)
   displayName: 'push docker images'
