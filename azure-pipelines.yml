@@ -61,17 +61,6 @@ jobs:
   - script: docker push $(imageName)
     displayName: 'push docker'
 
-- job: french
-  timeoutInMinutes: 90
-  dependsOn:
-  - login
-  steps:
-  - script: docker build -f Dockerfile -t $(imageName):3.9.2-french -t $(imageName):french .
-    workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/french"
-    displayName: 'build 3.9.2 french'
-  - script: docker push $(imageName)
-    displayName: 'push docker'
-
 
 - job: french
   timeoutInMinutes: 90
