@@ -1,5 +1,6 @@
 stanford-corenlp
 -----
+[![Build Status](https://gabrielbico.visualstudio.com/OSS/_apis/build/status/Nepomuceno.CoreNLPContainer?branchName=master)](https://gabrielbico.visualstudio.com/OSS/_build/latest?definitionId=3&branchName=master)
 
 Inspired on: https://github.com/NLPbox/stanford-corenlp-docker
 

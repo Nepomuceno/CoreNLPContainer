@@ -10,8 +10,19 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'stanfordcorenlp'
+  imageName: '$(dockerId)/stanfordcorenlp'
 
 steps:
-- script: docker build -f Dockerfile -t $(imageName):3.9.2 .
-  displayName: 'docker build'
+- script: docker login -u $(dockerId) -p $(pswd)
+  displayName: 'login docker hub'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2 -t $(imageName):3.9.2-english -t $(imageName):english -t $(imageName):latest .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english"
+  displayName: 'build 3.9.2 english'
+
+- script: docker build -f Dockerfile -t $(imageName):3.9.2-english-kbp -t $(imageName):english-kbp .
+  workingDirectory: "$(System.DefaultWorkingDirectory)/3.9.2/english-kbp"
+  displayName: 'build 3.9.2 english-kbp'
+
+- script: docker push $(imageName)
+  displayName: 'push docker images'
