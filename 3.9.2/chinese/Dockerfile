@@ -26,6 +26,8 @@ COPY --from=builder /data/corenlp .
 ENV JAVA_XMX 4g
 ENV PORT 9000
 ENV TIMEOUT 25000
+ENV USERNAME ""
+ENV PASSWORD ""
 EXPOSE $PORT
 
-CMD java -Xmx$JAVA_XMX -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port $PORT -timeout $TIMEOUT
+CMD if [ $USERNAME = "" ]; then java -Xmx$JAVA_XMX -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port $PORT -timeout $TIMEOUT ; else java -Xmx$JAVA_XMX -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port $PORT -timeout $TIMEOUT -username $USERNAME -password $PASSWORD ; fi 
