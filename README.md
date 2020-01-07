@@ -38,10 +38,10 @@ from Docker Hub locally at ``http://localhost:9000``, just type:
 docker run -p 9000:9000 gabrielbico/stanfordcorenlp
 ```
 
-By default, CoreNLP will not have auth enable you can add Auth to it by seeting up the `USERNAME` and `PASSWORD` variables :
+By default, CoreNLP will not have auth enable you can add Auth to it by seeting up the `LOGIN` and `PASSWORD` variables :
 
 ```
-docker run -e USERNAME=YOUR_USER -e PASSWORD=YOUR_SECRET -p 9000:9000 -ti gabrielbico/stanfordcorenlp
+docker run -e LOGIN=YOUR_USER -e PASSWORD=YOUR_SECRET -p 9000:9000 -ti gabrielbico/stanfordcorenlp
 ```
 
 By default, CoreNLP will use up to 4GB of RAM. You can change this by setting
